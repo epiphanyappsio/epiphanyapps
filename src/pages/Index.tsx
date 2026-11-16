@@ -9,6 +9,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Seo } from "@/components/Seo";
 import { sortedApps } from "@/data/apps";
+import { SITE_URL, absUrl } from "@/config/site";
 
 const TITLE = "Epiphany Apps | AI Tools, App Builders & Automation Software";
 const DESCRIPTION =
@@ -26,7 +27,7 @@ const Index = () => {
         "@type": "SoftwareApplication",
         name: app.name,
         description: app.description,
-        url: app.url,
+        url: absUrl(app.url),
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
       },
@@ -37,9 +38,9 @@ const Index = () => {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Epiphany Apps",
-    url: "https://epiphanyapps.org",
+    url: SITE_URL,
     description: DESCRIPTION,
-    publisher: { "@type": "Organization", name: "Epiphany Apps", url: "https://epiphanyapps.org" },
+    publisher: { "@type": "Organization", name: "Epiphany Apps", url: SITE_URL },
   };
 
   return (

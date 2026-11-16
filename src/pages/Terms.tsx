@@ -1,3 +1,4 @@
+import { siteEmail, SITE_DOMAIN } from "@/config/site";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -38,7 +39,7 @@ const Terms = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-display font-bold mb-4">2. Who We Are</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Epiphany Apps is a software company registered in Ontario, Canada, operating epiphanyapps.org and all associated Services. References to "we," "us," or "our" mean Epiphany Apps.
+              Epiphany Apps is a software company registered in Ontario, Canada, operating {SITE_DOMAIN} and all associated Services. References to "we," "us," or "our" mean Epiphany Apps.
             </p>
           </section>
 
@@ -226,7 +227,7 @@ const Terms = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-display font-bold mb-4">16. Modifications to Terms</h2>
             <p className="text-muted-foreground leading-relaxed">
-              We may update these Terms at any time. We will notify you of material changes by posting updated Terms at epiphanyapps.org/terms and updating the "Last Updated" date. Continued use of our Services after changes are posted constitutes your acceptance of the updated Terms.
+              We may update these Terms at any time. We will notify you of material changes by posting updated Terms at {SITE_DOMAIN}/terms and updating the "Last Updated" date. Continued use of our Services after changes are posted constitutes your acceptance of the updated Terms.
             </p>
           </section>
 
@@ -257,18 +258,18 @@ const Terms = () => {
             <h2 className="text-2xl font-display font-bold mb-4">20. Contact Us</h2>
             <p className="text-muted-foreground leading-relaxed">
               General support:{" "}
-              <a href="mailto:support@epiphanyapps.org" className="text-primary hover:text-primary/80">support@epiphanyapps.org</a>
+              <a href={`mailto:${siteEmail("support")}`} className="text-primary hover:text-primary/80">{siteEmail("support")}</a>
               <br />
               Legal notices:{" "}
-              <a href="mailto:legal@epiphanyapps.org" className="text-primary hover:text-primary/80">legal@epiphanyapps.org</a>
+              <a href={`mailto:${siteEmail("legal")}`} className="text-primary hover:text-primary/80">{siteEmail("legal")}</a>
               <br />
               Privacy inquiries:{" "}
-              <a href="mailto:privacy@epiphanyapps.org" className="text-primary hover:text-primary/80">privacy@epiphanyapps.org</a>
+              <a href={`mailto:${siteEmail("privacy")}`} className="text-primary hover:text-primary/80">{siteEmail("privacy")}</a>
             </p>
             <p className="text-muted-foreground leading-relaxed mt-4">
               Epiphany Apps<br />
               Ontario, Canada<br />
-              epiphanyapps.org
+              {SITE_DOMAIN}
             </p>
           </section>
         </div>

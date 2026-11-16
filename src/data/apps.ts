@@ -13,7 +13,8 @@ import intelAnalystAsset from "@/assets/intel-analyst-logo-v2.png.asset.json";
 import keyFlowAsset from "@/assets/key-flow-logo-v2.png.asset.json";
 import divergentAsset from "@/assets/divergent-logo-v2.png.asset.json";
 import linkAppAsset from "@/assets/link-app-logo.png.asset.json";
-import screenTimeAsset from "@/assets/screen-time-logo.png.asset.json";
+import screenTimeAsset from "@/assets/screen-time-logo-v2.png.asset.json";
+import autoCloseAsset from "@/assets/auto-close-logo.png.asset.json";
 import tagTrendsAsset from "@/assets/tag-trends-logo.png.asset.json";
 import socialSwiftAsset from "@/assets/social-swift-ai-logo.png.asset.json";
 import dragonAsset from "@/assets/chaos-ai-logo.png.asset.json";
@@ -44,6 +45,15 @@ export interface AppEntry {
 
 
 export const APPS: AppEntry[] = [
+  {
+    name: "Auto Close",
+    description: "Take back your phone. AI-powered control that schedules app shutdowns, cuts background data, and blocks mic and camera access, so apps like YouTube can't listen or track you.",
+    image: autoCloseAsset.url,
+    url: "/auto-close",
+    color: "text-purple-400",
+    comingSoon: true,
+    category: "revolutionary",
+  },
   {
     name: "AutoPilot AI",
     description: "World's first autonomous social media engine. Slices content into viral clips & auto-posts everywhere.",

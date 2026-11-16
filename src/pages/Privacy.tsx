@@ -1,3 +1,4 @@
+import { siteEmail, SITE_DOMAIN } from "@/config/site";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -29,7 +30,7 @@ const Privacy = () => {
           <p className="text-muted-foreground mb-8">Last Updated: November 12, 2026</p>
 
           <p className="text-muted-foreground leading-relaxed mb-8">
-            Epiphany Apps ("we," "us," "our") operates epiphanyapps.org and all associated applications,
+            Epiphany Apps ("we," "us," "our") operates {SITE_DOMAIN} and all associated applications,
             tools, extensions, APIs, and services (collectively, the "Services"). This Privacy Policy
             explains how we collect, use, and protect your information. By using our Services, you
             agree to this policy.
@@ -155,7 +156,7 @@ const Privacy = () => {
             </p>
             <p className="text-muted-foreground leading-relaxed">
               <span className="text-foreground font-semibold">User-initiated deletion:</span> Every Epiphany Apps application provides an in-app option to delete your account and associated data. Upon request, all your personal data except your email address will be deleted within 30 days. To have your email address permanently removed, use the unsubscribe link in any email we send you or contact us at{" "}
-              <a href="mailto:privacy@epiphanyapps.org" className="text-primary hover:text-primary/80">privacy@epiphanyapps.org</a>.
+              <a href={`mailto:${siteEmail("privacy")}`} className="text-primary hover:text-primary/80">{siteEmail("privacy")}</a>.
             </p>
           </section>
 
@@ -181,7 +182,7 @@ const Privacy = () => {
             </p>
             <p className="text-muted-foreground leading-relaxed">
               To exercise any of these rights, contact us at{" "}
-              <a href="mailto:privacy@epiphanyapps.org" className="text-primary hover:text-primary/80">privacy@epiphanyapps.org</a>. We will respond within 30 days.
+              <a href={`mailto:${siteEmail("privacy")}`} className="text-primary hover:text-primary/80">{siteEmail("privacy")}</a>. We will respond within 30 days.
             </p>
           </section>
 
@@ -196,7 +197,7 @@ const Privacy = () => {
             <h2 className="text-2xl font-display font-bold mb-4">10. Children's Privacy</h2>
             <p className="text-muted-foreground leading-relaxed">
               Our Services are not directed to children under the age of 13 (or 16 in the European Union). We do not knowingly collect personal information from children. If you believe a child has provided us with personal information, contact us at{" "}
-              <a href="mailto:privacy@epiphanyapps.org" className="text-primary hover:text-primary/80">privacy@epiphanyapps.org</a> and we will delete it immediately.
+              <a href={`mailto:${siteEmail("privacy")}`} className="text-primary hover:text-primary/80">{siteEmail("privacy")}</a> and we will delete it immediately.
             </p>
           </section>
 
@@ -217,7 +218,7 @@ const Privacy = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-display font-bold mb-4">13. Changes to This Policy</h2>
             <p className="text-muted-foreground leading-relaxed">
-              We may update this Privacy Policy at any time. We will notify you of material changes by posting the updated policy at epiphanyapps.org/privacy and updating the "Last Updated" date. Continued use of our Services after changes are posted constitutes acceptance.
+              We may update this Privacy Policy at any time. We will notify you of material changes by posting the updated policy at {SITE_DOMAIN}/privacy and updating the "Last Updated" date. Continued use of our Services after changes are posted constitutes acceptance.
             </p>
           </section>
 
@@ -225,18 +226,18 @@ const Privacy = () => {
             <h2 className="text-2xl font-display font-bold mb-4">14. Contact Us</h2>
             <p className="text-muted-foreground leading-relaxed">
               Privacy inquiries:{" "}
-              <a href="mailto:privacy@epiphanyapps.org" className="text-primary hover:text-primary/80">privacy@epiphanyapps.org</a>
+              <a href={`mailto:${siteEmail("privacy")}`} className="text-primary hover:text-primary/80">{siteEmail("privacy")}</a>
               <br />
               General support:{" "}
-              <a href="mailto:support@epiphanyapps.org" className="text-primary hover:text-primary/80">support@epiphanyapps.org</a>
+              <a href={`mailto:${siteEmail("support")}`} className="text-primary hover:text-primary/80">{siteEmail("support")}</a>
               <br />
               Legal notices:{" "}
-              <a href="mailto:legal@epiphanyapps.org" className="text-primary hover:text-primary/80">legal@epiphanyapps.org</a>
+              <a href={`mailto:${siteEmail("legal")}`} className="text-primary hover:text-primary/80">{siteEmail("legal")}</a>
             </p>
             <p className="text-muted-foreground leading-relaxed mt-4">
               Epiphany Apps<br />
               Ontario, Canada<br />
-              epiphanyapps.org
+              {SITE_DOMAIN}
             </p>
           </section>
         </div>

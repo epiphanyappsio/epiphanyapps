@@ -1,3 +1,4 @@
+import { siteEmail, SITE_DOMAIN } from "@/config/site";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -35,7 +36,7 @@ const Support = () => {
             <p className="text-muted-foreground mb-6">
               Tap below — your email app opens with our address pre-filled. Just write your subject and message.
             </p>
-            <a href="mailto:support@epiphanyapps.org">
+            <a href={`mailto:${siteEmail("support")}`}>
               <Button size="lg" className="rounded-2xl bg-gradient-hero hover:opacity-90 font-semibold">
                 Email Us
               </Button>

@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { SITE_URL, absUrl } from "@/config/site";
 
 interface SeoProps {
   title: string;
@@ -16,14 +17,14 @@ export const Seo = ({ title, description, path, jsonLd, noindex }: SeoProps) => 
     <Helmet>
       <title>{title}</title>
       <meta name="description" content={description} />
-      <link rel="canonical" href={path} />
+      <link rel="canonical" href={absUrl(path)} />
       {noindex ? <meta name="robots" content="noindex, follow" /> : <meta name="robots" content="index, follow" />}
 
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Epiphany Apps" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:url" content={path} />
+      <meta property="og:url" content={absUrl(path)} />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
@@ -43,8 +44,8 @@ export const breadcrumbLd = (name: string, path: string) => ({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-    { "@type": "ListItem", position: 2, name, item: path },
+    { "@type": "ListItem", position: 1, name: "Home", item: absUrl("/") },
+    { "@type": "ListItem", position: 2, name, item: absUrl(path) },
   ],
 });
 
@@ -59,8 +60,8 @@ export const softwareAppLd = (opts: {
   "@type": "SoftwareApplication",
   name: opts.name,
   description: opts.description,
-  url: opts.path,
+  url: absUrl(opts.path),
   applicationCategory: opts.category ?? "BusinessApplication",
   operatingSystem: "Web",
-  publisher: { "@type": "Organization", name: "Epiphany Apps", url: "https://epiphanyapps.org" },
+  publisher: { "@type": "Organization", name: "Epiphany Apps", url: SITE_URL },
 });

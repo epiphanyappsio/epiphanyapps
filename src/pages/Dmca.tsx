@@ -1,3 +1,4 @@
+import { siteEmail, SITE_DOMAIN } from "@/config/site";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -69,8 +70,8 @@ const Dmca = () => {
             <p className="text-muted-foreground leading-relaxed mb-4">
               If you believe content available through the Services infringes your copyright, send a
               written notice by email to{" "}
-              <a href="mailto:legal@epiphanyapps.org" className="text-primary hover:text-primary/80">
-                legal@epiphanyapps.org
+              <a href={`mailto:${siteEmail("legal")}`} className="text-primary hover:text-primary/80">
+                {siteEmail("legal")}
               </a>{" "}
               that includes all of the following:
             </p>
@@ -102,8 +103,8 @@ const Dmca = () => {
             <p className="text-muted-foreground leading-relaxed mb-4">
               If your content was removed and you believe that was a mistake or a misidentification,
               you may send a counter-notice by email to{" "}
-              <a href="mailto:legal@epiphanyapps.org" className="text-primary hover:text-primary/80">
-                legal@epiphanyapps.org
+              <a href={`mailto:${siteEmail("legal")}`} className="text-primary hover:text-primary/80">
+                {siteEmail("legal")}
               </a>{" "}
               that includes all of the following:
             </p>
@@ -164,24 +165,24 @@ const Dmca = () => {
             <h2 className="text-2xl font-display font-bold mb-4">11. Contact Us</h2>
             <p className="text-muted-foreground leading-relaxed">
               Copyright takedown notices, counter-notices, and legal notices:{" "}
-              <a href="mailto:legal@epiphanyapps.org" className="text-primary hover:text-primary/80">
-                legal@epiphanyapps.org
+              <a href={`mailto:${siteEmail("legal")}`} className="text-primary hover:text-primary/80">
+                {siteEmail("legal")}
               </a>
               <br />
               Privacy inquiries:{" "}
-              <a href="mailto:privacy@epiphanyapps.org" className="text-primary hover:text-primary/80">
-                privacy@epiphanyapps.org
+              <a href={`mailto:${siteEmail("privacy")}`} className="text-primary hover:text-primary/80">
+                {siteEmail("privacy")}
               </a>
               <br />
               General support:{" "}
-              <a href="mailto:support@epiphanyapps.org" className="text-primary hover:text-primary/80">
-                support@epiphanyapps.org
+              <a href={`mailto:${siteEmail("support")}`} className="text-primary hover:text-primary/80">
+                {siteEmail("support")}
               </a>
             </p>
             <p className="text-muted-foreground leading-relaxed mt-4">
               Epiphany Apps<br />
               Ontario, Canada<br />
-              epiphanyapps.org
+              {SITE_DOMAIN}
             </p>
           </section>
         </div>

@@ -1,0 +1,1 @@
+- Never hardcode the production domain; read it from `src/config/site.ts` (env `VITE_SITE_URL`/`VITE_SITE_DOMAIN`) or `%VITE_*%` in index.html — keeps the site portable across domains (see DOMAINS.md).
