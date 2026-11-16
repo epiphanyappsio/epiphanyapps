@@ -1,13 +1,4 @@
 import { Link } from "react-router-dom";
-import { Twitter, Instagram, Youtube, Linkedin, MessageCircle } from "lucide-react";
-
-const SOCIALS = [
-  { label: "X (Twitter)", href: "https://x.com/epiphanyapps", Icon: Twitter },
-  { label: "Instagram", href: "https://instagram.com/epiphanyapps", Icon: Instagram },
-  { label: "YouTube", href: "https://youtube.com/@epiphanyapps", Icon: Youtube },
-  { label: "LinkedIn", href: "https://linkedin.com/company/epiphanyapps", Icon: Linkedin },
-  { label: "Discord", href: "https://discord.gg/epiphanyapps", Icon: MessageCircle },
-];
 
 export const Footer = () => {
   return (
@@ -20,21 +11,6 @@ export const Footer = () => {
           </Link>
 
           <p className="text-sm font-medium" style={{ color: "hsl(0 0% 92%)" }}>Global Tools for Everyone</p>
-
-          <nav className="flex items-center justify-center gap-4" aria-label="Social media">
-            {SOCIALS.map(({ label, href, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="p-2 rounded-full text-primary hover:text-white hover:bg-primary/25 transition-colors"
-              >
-                <Icon className="w-4 h-4" aria-hidden="true" />
-              </a>
-            ))}
-          </nav>
 
 
           <nav className="flex flex-wrap items-center justify-center gap-6 text-sm" aria-label="Footer navigation">

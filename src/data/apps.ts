@@ -10,7 +10,7 @@ import ledditAsset from "@/assets/leddit-logo.png.asset.json";
 import aiVibesAsset from "@/assets/ai-vibes-logo.png.asset.json";
 import floAsset from "@/assets/flo-logo.png.asset.json";
 import intelAnalystAsset from "@/assets/intel-analyst-logo-v2.png.asset.json";
-import keyFlowAsset from "@/assets/key-flow-logo-v2.png.asset.json";
+import keyFlowAsset from "@/assets/key-flow-logo-v3.png.asset.json";
 import divergentAsset from "@/assets/divergent-logo-v2.png.asset.json";
 import linkAppAsset from "@/assets/link-app-logo.png.asset.json";
 import screenTimeAsset from "@/assets/screen-time-logo-v2.png.asset.json";
@@ -149,7 +149,6 @@ export const APPS: AppEntry[] = [
     name: "Key Flow",
     description: "Plug in your AI subscriptions and API keys once. Key Flow rotates them the instant one taps out, so your work never hits a wall.",
     image: keyFlowAsset.url,
-    imageBg: "bg-white",
     url: "/key-flow",
     color: "text-cyan-400",
     comingSoon: true,
