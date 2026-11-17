@@ -1,0 +1,4 @@
+- [ ] Reorder Support: reviews, feature requests, email; remove response-time promise.
+- [ ] Add official Google Play artwork and store link.
+- [ ] Clarify commercial Claude training and safety-retention terms in Privacy.
+- [ ] Verify desktop/mobile pages and save changes.

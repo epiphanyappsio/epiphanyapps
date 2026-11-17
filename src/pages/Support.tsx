@@ -1,10 +1,12 @@
-import { siteEmail, SITE_DOMAIN } from "@/config/site";
+import { siteEmail } from "@/config/site";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Mail, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Seo, breadcrumbLd } from "@/components/Seo";
+import playWebp from "@/assets/google-play-icon.webp.asset.json";
+import playPng from "@/assets/google-play-icon.png.asset.json";
 
 const Support = () => {
   return (
@@ -28,32 +30,44 @@ const Support = () => {
           <h1 className="text-5xl font-display font-bold mb-6">Need Help?</h1>
 
           <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
-            We're here to help. Reach out and we'll get back to you within 24 hours.
+            We're here to help.
           </p>
 
-          <div className="rounded-3xl border border-border/50 backdrop-blur-xl bg-card/40 p-8 mb-8">
-            <h2 className="text-2xl font-display font-bold mb-4">Email Support</h2>
-            <p className="text-muted-foreground mb-6">
-              Tap below — your email app opens with our address pre-filled. Just write your subject and message.
-            </p>
-            <a href={`mailto:${siteEmail("support")}`}>
-              <Button size="lg" className="rounded-2xl bg-gradient-hero hover:opacity-90 font-semibold">
-                Email Us
-              </Button>
-            </a>
+          <div className="rounded-lg border border-secondary/40 bg-card/40 p-6 sm:p-8 mb-6">
+            <h2 className="text-3xl font-display font-bold mb-6">Leave a Review</h2>
+            <Button asChild variant="ghost" className="h-auto w-full rounded-lg py-5 px-3 sm:px-6">
+              <a href="https://play.google.com/store/apps" target="_blank" rel="noopener noreferrer" aria-label="Play Store (opens in a new tab)">
+                <picture className="shrink-0">
+                  <source srcSet={playWebp.url} type="image/webp" />
+                  <img src={playPng.url} alt="" width="136" height="136" fetchPriority="high" className="h-24 w-24 sm:h-32 sm:w-32 object-contain" />
+                </picture>
+                <span className="ml-4 sm:ml-8 text-2xl sm:text-3xl font-display font-semibold">Play Store</span>
+                <ArrowUpRight className="ml-auto shrink-0 h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
+              </a>
+            </Button>
           </div>
 
-          <div className="rounded-3xl border border-border/50 backdrop-blur-xl bg-gradient-to-br from-primary/10 to-secondary/10 p-8">
-            <h2 className="text-2xl font-display font-bold mb-4">Feature Requests & Feedback</h2>
+          <div className="rounded-lg border border-border/50 bg-card/40 p-6 sm:p-8 mb-6">
+            <h2 className="text-2xl font-display font-bold mb-4">Feature Requests</h2>
             <p className="text-muted-foreground mb-6 leading-relaxed">
               Have an idea for a new feature or want to vote on what we build next?
               Join our community board and help shape the future of Epiphany Apps.
             </p>
-            <a href="https://epiphanyapps.featurebase.app/" target="_blank" rel="noopener noreferrer">
-              <Button size="lg" className="rounded-2xl bg-gradient-hero hover:opacity-90 font-semibold">
-                Request a Feature
-              </Button>
-            </a>
+            <Button asChild size="lg" className="rounded-lg bg-gradient-hero hover:opacity-90 font-semibold">
+              <a href="https://epiphanyapps.featurebase.app/" target="_blank" rel="noopener noreferrer">
+                <MessageSquare className="mr-2 h-5 w-5" aria-hidden="true" />Request a Feature
+              </a>
+            </Button>
+          </div>
+
+          <div className="rounded-lg border border-border/50 bg-card/40 p-6 sm:p-8">
+            <h2 className="text-2xl font-display font-bold mb-4">Email Support</h2>
+            <p className="text-muted-foreground mb-6">Need a hand? Send us a message.</p>
+            <Button asChild size="lg" className="rounded-lg bg-gradient-hero hover:opacity-90 font-semibold">
+              <a href={`mailto:${siteEmail("support")}`}>
+                <Mail className="mr-2 h-5 w-5" aria-hidden="true" />Email Us
+              </a>
+            </Button>
           </div>
 
           <div className="mt-12 text-muted-foreground">

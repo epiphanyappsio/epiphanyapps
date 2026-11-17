@@ -27,7 +27,7 @@ const Privacy = () => {
         <div className="max-w-4xl mx-auto prose prose-invert">
           <h1 className="text-4xl font-display font-bold mb-4">Privacy Policy</h1>
           <p className="text-muted-foreground mb-2">Epiphany Apps</p>
-          <p className="text-muted-foreground mb-8">Last Updated: November 12, 2026</p>
+          <p className="text-muted-foreground mb-8">Last Updated: November 17, 2026</p>
 
           <p className="text-muted-foreground leading-relaxed mb-8">
             Epiphany Apps ("we," "us," "our") operates {SITE_DOMAIN} and all associated applications,
@@ -106,8 +106,32 @@ const Privacy = () => {
               <li>• AI-generated content may be inaccurate, incomplete, or imperfect — you use it at your own risk</li>
               <li>• We do not use AI services that engage in or support weapons development, warfare applications, or activities that violate human rights</li>
               <li>• Content you submit to AI-powered features may be processed by our selected AI service providers subject to their respective privacy commitments</li>
-              <li>• No vendor names are listed here intentionally, as our provider relationships may change; however our ethical selection standards do not</li>
+              <li>• Provider relationships may change; our privacy and ethical selection standards continue to apply</li>
             </ul>
+            <p className="text-foreground font-semibold mt-4 mb-2">Claude: commercial processing and safety retention</p>
+            <p className="text-muted-foreground leading-relaxed mb-3">
+              Where Claude is used through Anthropic's commercial products or API to deliver our Services,
+              including AI-assisted customer support, Anthropic does not use submitted inputs or generated
+              outputs to train its models by default. This default does not apply to content expressly
+              authorized for training, including feedback voluntarily submitted directly to Anthropic.
+              We do not authorize the use of your content for model training.
+            </p>
+            <p className="text-muted-foreground leading-relaxed mb-3">
+              Model-training restrictions do not constitute a guarantee of zero data retention.
+              Under Anthropic's standard commercial API policy, inputs and outputs are deleted within
+              30 days, subject to applicable product-specific retention, contractual arrangements, and
+              exceptions for safety, enforcement of usage policies, and compliance with law.
+              Content flagged as a potential usage-policy violation may be retained for up to two years,
+              and related trust-and-safety classification scores for up to seven years. Longer retention
+              may apply where required by law. These provider-level exceptions are distinct from our
+              account-deletion timelines in Section 7.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              See Anthropic's{" "}
+              <a href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">commercial model-training policy</a>{" "}
+              and{" "}
+              <a href="https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">commercial data-retention policy</a>.
+            </p>
           </section>
 
           <section className="mb-8">
@@ -125,8 +149,9 @@ const Privacy = () => {
             </ul>
             <p className="text-muted-foreground leading-relaxed">
               These providers access only the minimum information necessary to perform their functions. We do
-              not authorize them to use your information for their own purposes. We do not list provider names
-              in this policy as our technical infrastructure may evolve; however our data minimization and
+              not authorize them to use your information for model training or unrelated commercial purposes.
+              Providers may also process and retain limited information for security, abuse prevention,
+              and legal compliance as described in Section 4. Our technical infrastructure may evolve; however our data minimization and
               ethical standards remain constant.
             </p>
           </section>
