@@ -28,6 +28,7 @@ interface AppCardProps {
 export const AppCard = ({ app, index, total = 3 }: AppCardProps) => {
   const Icon = app.icon;
   const [waitlistOpen, setWaitlistOpen] = useState(false);
+  const [imageFailed, setImageFailed] = useState(false);
   const [inView, setInView] = useState(false);
   const [active, setActive] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -91,8 +92,29 @@ export const AppCard = ({ app, index, total = 3 }: AppCardProps) => {
         <CardHeader>
           <div className="flex items-start justify-between mb-4">
             {app.image ? (
-              <div className={`w-14 h-14 rounded-full overflow-hidden ring-2 ring-primary/30 ${app.imageBg ?? "bg-black"}`}>
-                <img src={app.image} alt={`${app.name} logo`} className="w-full h-full object-cover" loading="lazy" decoding="async" />
+              <div
+                className={`w-14 h-14 rounded-full overflow-hidden ring-2 ring-primary/30 ${app.imageBg ?? "bg-black"}`}
+                role="img"
+                aria-label={`${app.name} logo`}
+              >
+                {imageFailed ? (
+                  <span className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/30 to-secondary/30 px-2 text-center text-xs font-bold tracking-wide text-white">
+                    {app.name
+                      .split(" ")
+                      .map((word) => word[0])
+                      .join("")
+                      .slice(0, 2)}
+                  </span>
+                ) : (
+                  <img
+                    src={app.image}
+                    alt={`${app.name} logo`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    onError={() => setImageFailed(true)}
+                  />
+                )}
               </div>
 
             ) : Icon ? (
