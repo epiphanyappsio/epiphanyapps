@@ -6,7 +6,7 @@ The site has no hardcoded production domain. Everything derives from:
 |---|---|---|
 | `VITE_SITE_URL` | `https://epiphanyapps.io` | canonical, og:url, JSON-LD, sitemap, robots.txt |
 | `VITE_SITE_DOMAIN` | `epiphanyapps.io` | contact emails and domain shown in legal text |
-| `VITE_LEGACY_HOSTS` | `epiphanyapps.io,www.epiphanyapps.io` | old hosts forwarded to the new domain, same path |
+| `VITE_LEGACY_HOSTS` | `epiphanyapps.org,www.epiphanyapps.org` | old hosts forwarded to the new domain, same path |
 
 Set in `.env.production` / `.env.development` (or the host's env settings). Code reads them only via `src/config/site.ts`.
 `scripts/generate-sitemap.ts` rewrites `public/sitemap.xml` and `public/robots.txt` before every dev/build.

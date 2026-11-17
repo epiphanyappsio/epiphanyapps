@@ -13,6 +13,7 @@ interface AppCardProps {
     description: string;
     icon?: LucideIcon;
     image?: string;
+    imageWebp?: string;
     imageBg?: string;
 
     url: string;
@@ -106,14 +107,19 @@ export const AppCard = ({ app, index, total = 3 }: AppCardProps) => {
                       .slice(0, 2)}
                   </span>
                 ) : (
-                  <img
+                  <picture>
+                    {app.imageWebp && <source srcSet={app.imageWebp} type="image/webp" />}
+                    <img
                     src={app.image}
                     alt={`${app.name} logo`}
                     className="w-full h-full object-cover"
-                    loading="lazy"
+                    width={56}
+                    height={56}
+                    loading="eager"
                     decoding="async"
                     onError={() => setImageFailed(true)}
                   />
+                  </picture>
                 )}
               </div>
 
