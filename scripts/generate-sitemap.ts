@@ -3,7 +3,7 @@ import { writeFileSync, readFileSync, existsSync } from "fs";
 import { resolve } from "path";
 const envFile = existsSync(".env.production") ? readFileSync(".env.production", "utf8") : "";
 const fromFile = envFile.match(/^VITE_SITE_URL=(.*)$/m)?.[1]?.trim();
-const BASE_URL = (process.env.VITE_SITE_URL || fromFile || "https://epiphanyapps.org").replace(/\/+$/, "");
+const BASE_URL = (process.env.VITE_SITE_URL || fromFile || "https://epiphanyapps.io").replace(/\/+$/, "");
 const entries = [
   { path: "/", changefreq: "weekly", priority: "1.0" },
   { path: "/support", changefreq: "yearly", priority: "0.4" },

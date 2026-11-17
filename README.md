@@ -22,7 +22,7 @@ Purpose: Brand + product showcase
 
 Each app has a focused, beautiful, minimal page with clear calls to action.
 
-Example: epiphanyapps.org/logosnap-ai
+Example: epiphanyapps.io/logosnap-ai
 
 You can even use canonical links to tie SEO juice together (so Google knows SocialMediaTools.org is the parent authority).
 
@@ -31,7 +31,7 @@ Anyways you get the idea
 ## Individual App Pages (Placeholder Template)
 Each `/apps/[app-name]` page should have:
 - Hero with app name and full description
-- "Launch App" button (links to `[appname].epiphanyapps.org`)
+- "Launch App" button (links to `[appname].epiphanyapps.io`)
 - Feature list (3-5 bullet points)
 - Screenshot placeholder area
 - Back to home button
@@ -47,7 +47,7 @@ Create a clean, simple TOS page with:
 - No refund policy
 - Account termination rights
 - Link to Privacy Policy
-- Contact email: support@epiphanyapps.org
+- Contact email: support@epiphanyapps.io
 
 ### Privacy Policy (`/privacy`)
 Create a GDPR-compliant privacy policy with:
@@ -56,13 +56,13 @@ Create a GDPR-compliant privacy policy with:
 - No selling of data clause
 - Cookie usage
 - User rights (delete account, export data)
-- Contact email: support@epiphanyapps.org
+- Contact email: support@epiphanyapps.io
 
 ### Support Page (`/support`)
 Create a simple support page with:
 - Heading: "Need Help?"
 - Text: "We're here to help. Send us a message and we'll get back to you within 24 hours."
-- Email link: support@epiphanyapps.org (clickable mailto link)
+- Email link: support@epiphanyapps.io (clickable mailto link)
 - Feature request section with text: "Have an idea? Submit feature requests and vote on others:"
 - Featurebase widget embed code placeholder (add comment: "<!-- Insert# Epiphany Apps Landing Page - Complete Build Prompt
 
@@ -194,7 +194,7 @@ Build a modern, bold landing page for Epiphany Apps - a portfolio showcasing 5 A
 ## Individual App Pages (Placeholder Template)
 Each `/apps/[app-name]` page should have:
 - Hero with app name and full description
-- "Launch App" button (links to `[appname].epiphanyapps.org`)
+- "Launch App" button (links to `[appname].epiphanyapps.io`)
 - Feature list (3-5 bullet points)
 - Screenshot placeholder area
 - Back to home button
@@ -205,7 +205,7 @@ Each `/apps/[app-name]` page should have:
 - Use the provided E logo image as the hero background (extended/repeated)
 - Keep it simple - no extra badges, testimonials, or footer bloat yet
 - Focus on making it visually stunning and fast
-- All apps link to subdomain structure: `[appname].epiphanyapps.org`
+- All apps link to subdomain structure: `[appname].epiphanyapps.io`
 
 ---
 
