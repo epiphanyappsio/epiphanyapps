@@ -1,4 +1,5 @@
-- [ ] Reorder Support: reviews, feature requests, email; remove response-time promise.
-- [ ] Add official Google Play artwork and store link.
-- [ ] Clarify commercial Claude training and safety-retention terms in Privacy.
-- [ ] Verify desktop/mobile pages and save changes.
+- [x] Reorder Support: reviews, feature requests, email; remove response-time promise.
+- [x] Add official Google Play artwork and store link.
+- [x] Clarify commercial Claude training and safety-retention terms in Privacy.
+- [x] Verify desktop/mobile pages and save changes.
+- [ ] Connect GitHub: requires the user to open Lovable project Settings → Git and authorize GitHub; this cannot be connected from chat.
