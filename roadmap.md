@@ -3,4 +3,5 @@
 - [x] Clarify commercial Claude training and safety-retention terms in Privacy.
 - [x] Verify desktop/mobile pages and save changes.
 - [x] Diagnose external-host logo paths and package original assets for Netlify builds.
+- [x] Resolve the Workbox logo-size build failure and verify the website still loads its logos.
 - [ ] Verify the Netlify deployment: waiting for the user's Netlify URL and a deployment containing the packaging fix.

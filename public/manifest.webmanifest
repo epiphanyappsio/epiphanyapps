@@ -1,0 +1,18 @@
+{
+  "name": "Epiphany Apps",
+  "short_name": "Epiphany",
+  "description": "AI-Powered Apps That Just Work",
+  "start_url": "/",
+  "scope": "/",
+  "theme_color": "#8B5CF6",
+  "background_color": "#1E0B3B",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
