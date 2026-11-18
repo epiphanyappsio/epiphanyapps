@@ -2,4 +2,5 @@
 - [x] Add official Google Play artwork and store link.
 - [x] Clarify commercial Claude training and safety-retention terms in Privacy.
 - [x] Verify desktop/mobile pages and save changes.
-- [ ] Connect GitHub: requires the user to open Lovable project Settings → Git and authorize GitHub; this cannot be connected from chat.
+- [x] Diagnose external-host logo paths and package original assets for Netlify builds.
+- [ ] Verify the Netlify deployment: waiting for the user's Netlify URL and a deployment containing the packaging fix.

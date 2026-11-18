@@ -1,2 +1,3 @@
 - Never hardcode the production domain; read it from `src/config/site.ts` (env `VITE_SITE_URL`/`VITE_SITE_DOMAIN`) or `%VITE_*%` in index.html — keeps the site portable across domains (see DOMAINS.md).
 - Serve official store artwork through asset pointers with WebP and PNG fallback; reuse original pixels to preserve brand accuracy.
+- Package pointer-referenced assets during Vite production builds using the portable-assets plugin; external hosts must serve original bytes at the same relative paths without relying on Lovable at runtime.

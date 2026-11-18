@@ -12,6 +12,14 @@ Set in `.env.production` / `.env.development` (or the host's env settings). Code
 `scripts/generate-sitemap.ts` rewrites `public/sitemap.xml` and `public/robots.txt` before every dev/build.
 Internal links are relative paths, so paths and slugs are unchanged by a domain move.
 
+## Netlify and other external hosts
+
+Use `npm run build` and publish `dist`. The Vite asset-packaging plugin downloads every original asset referenced by `src/assets/**/*.asset.json` and places its bytes at the same relative URL in `dist`. WebP and PNG fallbacks are both included; the browser's existing `<picture>` selection is unchanged. No asset request goes to Lovable at runtime on the deployed site.
+
+The build-time download origin is configured separately in `asset-hosting.json`. Override it with the host environment variable `LOVABLE_ASSET_SOURCE_URL` if the project is moved or the source address changes. It must be an accessible Lovable endpoint serving the existing assets (the current preview endpoint works). This is an asset source, not the site's canonical or production domain. Builds fail explicitly if any download is missing, incomplete, or returns HTML instead of the expected media type. Rebuild/redeploy Netlify after pulling this change; older deployments do not contain the image bytes.
+
+GitHub sync and publishing are separate: Lovable saves changes to the connected repository's synced branch; Netlify deploys only if its Git integration watches that branch and automatic deployments are enabled. Lovable's Publish/Update controls deploy to Lovable hosting, not to Netlify. Check Lovable Settings → Git and Netlify's deployment history to confirm delivery. Editing the same branch in multiple builders can replace another builder's work; coordinate changes before pushing.
+
 ## Migrating (e.g. .io -> .org -> .com)
 1. Connect the new domain in Lovable (Project Settings -> Domains) and keep the old one connected.
 2. Update `VITE_SITE_URL` and `VITE_SITE_DOMAIN`; add the old hosts to `VITE_LEGACY_HOSTS`. Publish.
