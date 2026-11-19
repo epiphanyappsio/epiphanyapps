@@ -5,3 +5,4 @@
 - [x] Diagnose external-host logo paths and package original assets for Netlify builds.
 - [x] Resolve the Workbox logo-size build failure and verify the website still loads its logos.
 - [ ] Verify the Netlify deployment: waiting for the user's Netlify URL and a deployment containing the packaging fix.
+- [ ] Verify the Cloudflare Pages/Workers deployment: waiting for a deploy from main that picks up wrangler.jsonc and the bundled wrangler devDependency.

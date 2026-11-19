@@ -3,3 +3,4 @@
 - Package pointer-referenced assets during Vite production builds using the portable-assets plugin; external hosts must serve original bytes at the same relative paths without relying on Lovable at runtime.
 - Keep home-screen support manifest-only; retain the retirement worker at `/sw.js` for existing installations, but never register it from the app — avoids stale previews and precache limits on original artwork.
 - Use Vite 6 with compatible plugins and keep `bun.lock` and `package-lock.json` synchronized; do not retain the obsolete binary Bun lockfile, so Lovable and external hosts resolve the upgraded toolchain.
+- Keep `wrangler.jsonc` pointing at the built output (`assets.directory` = `./dist`) and keep `wrangler` in devDependencies; without both, Cloudflare re-runs its setup wizard and re-downloads Wrangler on every deploy.
