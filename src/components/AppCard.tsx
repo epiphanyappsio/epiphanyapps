@@ -31,23 +31,52 @@ export const AppCard = ({ app, index, total = 3 }: AppCardProps) => {
   const [waitlistOpen, setWaitlistOpen] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
   const [inView, setInView] = useState(false);
+  const [armed, setArmed] = useState(false);
+  const shown = inView || !armed;
   const [active, setActive] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
+  // Progressive reveal: visible by default; only "armed" (hidden) once we know
+  // the browser can detect scrolling and the card starts below the screen.
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const rect = node.getBoundingClientRect();
+    const onScreen = rect.top < window.innerHeight && rect.bottom > 0;
+    if (typeof IntersectionObserver === "undefined" || reduce || onScreen) {
+      setInView(true);
+      return;
+    }
+    setArmed(true);
+    let timer: number | undefined;
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) setInView(true);
+          if (e.isIntersecting) {
+            setInView(true);
+            obs.disconnect();
+          }
         });
       },
-      { threshold: 0.25, rootMargin: "0px 0px -10% 0px" }
+      { threshold: 0.15, rootMargin: "0px 0px -5% 0px" }
     );
     obs.observe(node);
-    return () => obs.disconnect();
+    // Safety net: if the card is on screen but no reveal fired, show it anyway.
+    const check = () => {
+      const r = node.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) {
+        window.clearTimeout(timer);
+        timer = window.setTimeout(() => setInView(true), 2500);
+      }
+    };
+    window.addEventListener("scroll", check, { passive: true });
+    return () => {
+      obs.disconnect();
+      window.removeEventListener("scroll", check);
+      window.clearTimeout(timer);
+    };
   }, []);
 
   // Highlight the row that is currently crossing the middle of the viewport
@@ -79,11 +108,11 @@ export const AppCard = ({ app, index, total = 3 }: AppCardProps) => {
       <div
         ref={ref}
         className={`rounded-2xl border backdrop-blur-2xl bg-white/[0.04] shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:border-primary/60 hover:shadow-[0_0_40px_hsl(271,81%,56%,0.35)] group flex flex-col will-change-transform ${
-          active ? "border-primary shadow-[0_0_50px_hsl(271,81%,56%,0.55)]" : inView ? "border-primary/40 shadow-[0_0_25px_hsl(271,81%,56%,0.25)]" : "border-white/15"
+          active ? "border-primary shadow-[0_0_50px_hsl(271,81%,56%,0.55)]" : shown ? "border-primary/40 shadow-[0_0_25px_hsl(271,81%,56%,0.25)]" : "border-white/15"
         }`}
         style={{
-          opacity: inView ? 1 : 0,
-          transform: inView
+          opacity: shown ? 1 : 0,
+          transform: shown
             ? `translate3d(0,0,0) scale(${active ? 1.03 : 1})`
             : `translate3d(${hiddenTransform}, 24px, 0) scale(0.96)`,
           transition: `opacity 0.9s cubic-bezier(0.22,1,0.36,1) ${delay}s, transform 1.1s cubic-bezier(0.22,1,0.36,1) ${delay}s, border-color 0.4s ease, box-shadow 0.4s ease`,
