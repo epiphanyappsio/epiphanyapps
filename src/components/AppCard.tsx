@@ -37,57 +37,48 @@ export const AppCard = ({ app, index, total = 3 }: AppCardProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
-  // Progressive reveal: visible by default; only "armed" (hidden) once we know
-  // the browser can detect scrolling and the card starts below the screen.
+  // Entry slide: cards are ALWAYS fully visible (opacity never drops). Cards that
+  // start below the screen get a small offset, then slide into place ~200px
+  // before they reach the screen so they never lag behind your scroll.
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
     const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     const rect = node.getBoundingClientRect();
-    const onScreen = rect.top < window.innerHeight && rect.bottom > 0;
-    if (typeof IntersectionObserver === "undefined" || reduce || onScreen) {
+    const nearScreen = rect.top < window.innerHeight + 200 && rect.bottom > -200;
+    if (typeof IntersectionObserver === "undefined" || reduce || nearScreen) {
       setInView(true);
       return;
     }
     setArmed(true);
-    let timer: number | undefined;
     const obs = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            setInView(true);
-            obs.disconnect();
-          }
-        });
+        if (entries.some((e) => e.isIntersecting)) {
+          setInView(true);
+          obs.disconnect();
+        }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -5% 0px" }
+      { threshold: 0, rootMargin: "200px 0px 200px 0px" }
     );
     obs.observe(node);
-    // Safety net: if the card is on screen but no reveal fired, show it anyway.
-    const check = () => {
-      const r = node.getBoundingClientRect();
-      if (r.top < window.innerHeight && r.bottom > 0) {
-        window.clearTimeout(timer);
-        timer = window.setTimeout(() => setInView(true), 2500);
-      }
-    };
-    window.addEventListener("scroll", check, { passive: true });
+    // Safety net: never keep a card offset for long, whatever the browser does.
+    const timer = window.setTimeout(() => setInView(true), 4000);
     return () => {
       obs.disconnect();
-      window.removeEventListener("scroll", check);
       window.clearTimeout(timer);
     };
   }, []);
 
-  // Highlight the row that is currently crossing the middle of the viewport
+  // Scroll glow: the card lights up and lifts while it passes through the
+  // middle of the screen, then relaxes as you scroll past.
   useEffect(() => {
     const node = ref.current;
-    if (!node) return;
+    if (!node || typeof IntersectionObserver === "undefined") return;
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => setActive(e.isIntersecting));
       },
-      { threshold: 0, rootMargin: "-42% 0px -42% 0px" }
+      { threshold: 0, rootMargin: "-35% 0px -35% 0px" }
     );
     obs.observe(node);
     return () => obs.disconnect();
@@ -108,14 +99,16 @@ export const AppCard = ({ app, index, total = 3 }: AppCardProps) => {
       <div
         ref={ref}
         className={`rounded-2xl border backdrop-blur-2xl bg-white/[0.04] shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:border-primary/60 hover:shadow-[0_0_40px_hsl(271,81%,56%,0.35)] group flex flex-col will-change-transform ${
-          active ? "border-primary shadow-[0_0_50px_hsl(271,81%,56%,0.55)]" : shown ? "border-primary/40 shadow-[0_0_25px_hsl(271,81%,56%,0.25)]" : "border-white/15"
+          active
+            ? "border-primary bg-primary/[0.08] shadow-[0_0_60px_hsl(271,81%,56%,0.6),0_0_120px_hsl(188,100%,50%,0.18)]"
+            : "border-primary/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
         }`}
         style={{
-          opacity: shown ? 1 : 0,
+          opacity: 1,
           transform: shown
-            ? `translate3d(0,0,0) scale(${active ? 1.03 : 1})`
-            : `translate3d(${hiddenTransform}, 24px, 0) scale(0.96)`,
-          transition: `opacity 0.9s cubic-bezier(0.22,1,0.36,1) ${delay}s, transform 1.1s cubic-bezier(0.22,1,0.36,1) ${delay}s, border-color 0.4s ease, box-shadow 0.4s ease`,
+            ? `translate3d(0,${active ? "-4px" : "0"},0) scale(${active ? 1.03 : 1})`
+            : `translate3d(${hiddenTransform}, 24px, 0) scale(0.97)`,
+          transition: `transform ${shown && inView && armed ? `1.1s cubic-bezier(0.22,1,0.36,1) ${delay}s` : "0.6s cubic-bezier(0.22,1,0.36,1)"}, border-color 0.5s ease, box-shadow 0.6s ease, background-color 0.5s ease`,
         }}
       >
 
@@ -123,7 +116,7 @@ export const AppCard = ({ app, index, total = 3 }: AppCardProps) => {
           <div className="flex items-start justify-between mb-4">
             {app.image ? (
               <div
-                className={`w-14 h-14 rounded-full overflow-hidden ring-2 ring-primary/30 ${app.imageBg ?? "bg-black"}`}
+                className={`w-14 h-14 rounded-full overflow-hidden ring-2 transition-shadow duration-500 ${active ? "ring-primary shadow-[0_0_24px_hsl(271,81%,56%,0.7)]" : "ring-primary/30"} ${app.imageBg ?? "bg-black"}`}
                 role="img"
                 aria-label={`${app.name} logo`}
               >
