@@ -48,7 +48,7 @@ export const Header = () => {
       className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-primary/10 border-b border-primary/20"
       style={{ boxShadow: "0 0 20px hsl(271 81% 56% / 0.15)" }}
     >
-      <div className="mx-auto px-2 sm:px-4">
+      <div className="mx-auto pl-2 pr-[max(0.5rem,env(safe-area-inset-right))] sm:px-4">
         <div className="flex items-center justify-between h-11">
           <Link to="/" className="flex items-center gap-1.5 shrink-0 active:scale-95 transition-transform">
             <img

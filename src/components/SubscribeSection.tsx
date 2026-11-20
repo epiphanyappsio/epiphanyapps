@@ -19,7 +19,7 @@ export const SubscribeSection = () => {
 
   return (
     <section
-      className="py-20 px-4 border-y border-primary/25"
+      className="py-20 px-4 border-y border-primary/25 overflow-hidden"
       style={{ background: "linear-gradient(180deg, hsl(262 80% 6%) 0%, hsl(271 60% 14%) 100%)" }}
       aria-label="Subscribe for updates"
     >

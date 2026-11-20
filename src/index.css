@@ -68,9 +68,20 @@ All colors MUST be HSL.
     font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   }
 
+  /* Stop the page from sliding sideways on phones: nothing may widen the page.
+     "clip" (newer browsers) blocks sideways scrolling without breaking sticky elements. */
+  html, body {
+    overflow-x: hidden;
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
   }
 
 }

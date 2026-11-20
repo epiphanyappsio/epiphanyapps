@@ -36,6 +36,18 @@ export const AppCard = ({ app, index, total = 3 }: AppCardProps) => {
   const [active, setActive] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+  // Visitors who turned on "reduce motion" in their phone/computer settings get
+  // still cards: no slide-in, no lift, no scroll glow. Everyone else is unchanged.
+  const [reduceMotion, setReduceMotion] = useState(
+    () => typeof window !== "undefined" && !!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+  );
+  useEffect(() => {
+    const mq = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    if (!mq) return;
+    const update = () => setReduceMotion(mq.matches);
+    mq.addEventListener?.("change", update);
+    return () => mq.removeEventListener?.("change", update);
+  }, []);
 
   // Entry slide: cards are ALWAYS fully visible (opacity never drops). Cards that
   // start below the screen get a small offset, then slide into place ~200px
@@ -73,7 +85,10 @@ export const AppCard = ({ app, index, total = 3 }: AppCardProps) => {
   // middle of the screen, then relaxes as you scroll past.
   useEffect(() => {
     const node = ref.current;
-    if (!node || typeof IntersectionObserver === "undefined") return;
+    if (!node || reduceMotion || typeof IntersectionObserver === "undefined") {
+      setActive(false);
+      return;
+    }
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => setActive(e.isIntersecting));
@@ -82,7 +97,7 @@ export const AppCard = ({ app, index, total = 3 }: AppCardProps) => {
     );
     obs.observe(node);
     return () => obs.disconnect();
-  }, []);
+  }, [reduceMotion]);
 
   // Desktop: sides slide toward the center, center pops. Mobile: alternate sides.
   const center = Math.floor(total / 2);
@@ -98,12 +113,12 @@ export const AppCard = ({ app, index, total = 3 }: AppCardProps) => {
     <>
       <div
         ref={ref}
-        className={`rounded-2xl border backdrop-blur-2xl bg-white/[0.04] shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:border-primary/60 hover:shadow-[0_0_40px_hsl(271,81%,56%,0.35)] group flex flex-col will-change-transform ${
+        className={`rounded-2xl border backdrop-blur-2xl bg-white/[0.04] shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:border-primary/60 hover:shadow-[0_0_40px_hsl(271,81%,56%,0.35)] group flex flex-col motion-safe:will-change-transform motion-reduce:hover:shadow-none ${
           active
             ? "border-primary bg-primary/[0.08] shadow-[0_0_60px_hsl(271,81%,56%,0.6),0_0_120px_hsl(188,100%,50%,0.18)]"
             : "border-primary/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
         }`}
-        style={{
+        style={reduceMotion ? { opacity: 1, transform: "none", transition: "none" } : {
           opacity: 1,
           transform: shown
             ? `translate3d(0,${active ? "-4px" : "0"},0) scale(${active ? 1.03 : 1})`
@@ -116,7 +131,7 @@ export const AppCard = ({ app, index, total = 3 }: AppCardProps) => {
           <div className="flex items-start justify-between mb-4">
             {app.image ? (
               <div
-                className={`w-14 h-14 rounded-full overflow-hidden ring-2 transition-shadow duration-500 ${active ? "ring-primary shadow-[0_0_24px_hsl(271,81%,56%,0.7)]" : "ring-primary/30"} ${app.imageBg ?? "bg-black"}`}
+                className={`w-14 h-14 rounded-full overflow-hidden ring-2 transition-shadow duration-500 ${active ? "ring-primary shadow-[0_0_24px_hsl(271,81%,56%,0.7)]" : "ring-primary/30"} motion-reduce:transition-none ${app.imageBg ?? "bg-black"}`}
                 role="img"
                 aria-label={`${app.name} logo`}
               >

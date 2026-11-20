@@ -5,7 +5,7 @@ export const SocialMediaSection = () => {
   const apps = getAppsByCategory("social");
 
   return (
-    <section className="relative py-24 px-4 bg-background" aria-label="Social media tools">
+    <section className="relative py-24 px-4 bg-background overflow-hidden" aria-label="Social media tools">
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center space-y-6">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold">

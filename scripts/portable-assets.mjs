@@ -1,4 +1,4 @@
-import { readdir, readFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 export function assetOutputPath(url) {
@@ -8,27 +8,35 @@ export function assetOutputPath(url) {
   return url.slice(1);
 }
 
-async function findPointers(directory) {
-  const entries = await readdir(directory, { withFileTypes: true });
-  const groups = await Promise.all(entries.map(async (entry) => {
-    const path = resolve(directory, entry.name);
-    if (entry.isDirectory()) return findPointers(path);
-    if (!entry.name.endsWith(".asset.json")) return [];
-    return [JSON.parse(await readFile(path, "utf8"))];
-  }));
-  return groups.flat();
-}
-
-/** Copy CDN bytes into the deployment without changing preview asset pointers. */
+/**
+ * Safety net: if code imports a CDN pointer (*.asset.json), copy its bytes into
+ * the deployment. App logos are real files in src/assets, so normally nothing is
+ * imported this way and the build needs no outside network access.
+ */
 export function portableAssetsPlugin() {
+  const imported = new Set();
   return {
     name: "portable-lovable-assets",
     apply: "build",
+    buildStart() {
+      imported.clear();
+    },
+    transform(_code, id) {
+      const file = id.split("?")[0];
+      if (file.endsWith(".asset.json")) imported.add(file);
+      return null;
+    },
     async generateBundle() {
+      if (imported.size === 0) {
+        console.log("No CDN asset pointers imported; all images are bundled from project files.");
+        return;
+      }
       const config = JSON.parse(await readFile(resolve("asset-hosting.json"), "utf8"));
       const source = process.env.LOVABLE_ASSET_SOURCE_URL || config.sourceUrl;
       const origin = new URL(source).origin;
-      const pointers = await findPointers(resolve("src/assets"));
+      const pointers = await Promise.all(
+        [...imported].map(async (file) => JSON.parse(await readFile(file, "utf8"))),
+      );
       const unique = [...new Map(pointers.map((pointer) => [pointer.url, pointer])).values()];
       let next = 0;
       await Promise.all(Array.from({ length: Math.min(6, unique.length) }, async () => {

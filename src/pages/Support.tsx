@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Seo, breadcrumbLd } from "@/components/Seo";
-import playWebp from "@/assets/google-play-icon.webp.asset.json";
-import playPng from "@/assets/google-play-icon.png.asset.json";
+import playWebp from "@/assets/google-play-icon.webp";
+import playPng from "@/assets/google-play-icon.png";
 
 const Support = () => {
   return (
@@ -38,8 +38,8 @@ const Support = () => {
             <Button asChild variant="ghost" className="h-auto w-full rounded-lg py-5 px-3 sm:px-6">
               <a href="https://play.google.com/store/apps" target="_blank" rel="noopener noreferrer" aria-label="Play Store (opens in a new tab)">
                 <picture className="shrink-0">
-                  <source srcSet={playWebp.url} type="image/webp" />
-                  <img src={playPng.url} alt="" width="136" height="136" fetchPriority="high" className="h-24 w-24 sm:h-32 sm:w-32 object-contain" />
+                  <source srcSet={playWebp} type="image/webp" />
+                  <img src={playPng} alt="" width="136" height="136" fetchPriority="high" className="h-24 w-24 sm:h-32 sm:w-32 object-contain" />
                 </picture>
                 <span className="ml-4 sm:ml-8 text-2xl sm:text-3xl font-display font-semibold">Play Store</span>
                 <ArrowUpRight className="ml-auto shrink-0 h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
