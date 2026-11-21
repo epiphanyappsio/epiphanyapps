@@ -1,6 +1,6 @@
 - Never hardcode the production domain; read it from `src/config/site.ts` (env `VITE_SITE_URL`/`VITE_SITE_DOMAIN`) or `%VITE_*%` in index.html — keeps the site portable across domains (see DOMAINS.md).
-- Serve official store artwork through asset pointers with WebP and PNG fallback; reuse original pixels to preserve brand accuracy.
-- Package pointer-referenced assets during Vite production builds using the portable-assets plugin; external hosts must serve original bytes at the same relative paths without relying on Lovable at runtime.
+- Store app logos and store artwork as real image files in `src/assets` (WebP + PNG fallback, original pixels), imported directly — the owner hosts on Cloudflare and wants logos in the code, not Lovable's CDN.
+- Keep the portable-assets plugin as a safety net: it packages only `.asset.json` pointers actually imported by the build, so builds need no network access when none are imported.
 - Keep home-screen support manifest-only; retain the retirement worker at `/sw.js` for existing installations, but never register it from the app — avoids stale previews and precache limits on original artwork.
 - Use Vite 6 with compatible plugins and keep `bun.lock` and `package-lock.json` synchronized; do not retain the obsolete binary Bun lockfile, so Lovable and external hosts resolve the upgraded toolchain.
 - Keep `wrangler.jsonc` pointing at the built output (`assets.directory` = `./dist`) and keep `wrangler` in devDependencies; without both, Cloudflare re-runs its setup wizard and re-downloads Wrangler on every deploy.

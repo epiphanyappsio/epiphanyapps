@@ -5,4 +5,8 @@
 - [x] Diagnose external-host logo paths and package original assets for Netlify builds.
 - [x] Resolve the Workbox logo-size build failure and verify the website still loads its logos.
 - [ ] Verify the Netlify deployment: waiting for the user's Netlify URL and a deployment containing the packaging fix.
-- [ ] Verify the Cloudflare Pages/Workers deployment: waiting for a deploy from main that picks up wrangler.jsonc and the bundled wrangler devDependency.
+- [x] Verify the Cloudflare deployment (epiphanyapps.epiphanyapps-io.workers.dev shows all cards).
+- [x] Move app logos and Google Play icon into the project's own files.
+- [x] Stop sideways sliding on phones and keep the menu button on screen.
+- [x] Reduced-motion: still cards for visitors who prefer less animation.
+- [ ] Remove the old unused Lovable-storage logo pointers: waiting for the owner to type DELETE.
