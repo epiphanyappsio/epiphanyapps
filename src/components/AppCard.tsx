@@ -50,15 +50,15 @@ export const AppCard = ({ app, index, total = 3 }: AppCardProps) => {
   }, []);
 
   // Entry slide: cards are ALWAYS fully visible (opacity never drops). Cards that
-  // start below the screen get a small offset, then slide into place ~200px
-  // before they reach the screen so they never lag behind your scroll.
+  // start below the screen get a small offset, then slide into place the moment
+  // their edge crosses onto the screen, so you actually see them glide in.
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
     const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     const rect = node.getBoundingClientRect();
-    const nearScreen = rect.top < window.innerHeight + 200 && rect.bottom > -200;
-    if (typeof IntersectionObserver === "undefined" || reduce || nearScreen) {
+    const onScreen = rect.top < window.innerHeight && rect.bottom > 0;
+    if (typeof IntersectionObserver === "undefined" || reduce || onScreen) {
       setInView(true);
       return;
     }
@@ -70,7 +70,7 @@ export const AppCard = ({ app, index, total = 3 }: AppCardProps) => {
           obs.disconnect();
         }
       },
-      { threshold: 0, rootMargin: "200px 0px 200px 0px" }
+      { threshold: 0, rootMargin: "0px 0px 0px 0px" }
     );
     obs.observe(node);
     // Safety net: never keep a card offset for long, whatever the browser does.
